@@ -1,3 +1,4 @@
-export default function loading() {
-  return <h1>Loading...</h1>;
+export default function Loading() {
+  // You can add any UI inside Loading, including a Skeleton.
+  return <LoadingSkeleton />;
 }
