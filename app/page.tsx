@@ -3,8 +3,8 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <main>
-      <Link href='/profile'>My Profile</Link>
-      <h1>Hello World!</h1>
+      <h1>insert date</h1>
+      <h2>insert generated news with image, click to modal then full page</h2>
     </main>
   );
 }

@@ -2,9 +2,16 @@ import Link from 'next/link';
 
 export default function Profile() {
   return (
-    <>
-      <h1>Profile</h1>
-      <Link href='/'>Link to Home Page</Link>
-    </>
+    <div>
+      <h1>My profile!</h1>
+      <button>Login</button>
+      <h2>profile pic/logo</h2>
+      <p>profile info</p>
+
+      <h3>Excluded Words</h3>
+      <button>Add</button>
+      <button>Remove</button>
+      <p>success statement</p>
+    </div>
   );
 }
