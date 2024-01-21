@@ -1,18 +1,17 @@
 export default async function fetchArticles() {
   const url =
-    'https://real-time-news-data.p.rapidapi.com/top-headlines?country=US&lang=en';
+    'https://google-news-api1.p.rapidapi.com/search?language=en&limit=25';
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': 'process.env.RapidAPI_Key',
-      'X-RapidAPI-Host': 'process.env.RapidAPI_Host',
+      'X-RapidAPI-Key': 'bfab46e2fdmsh08bf157c46b411fp139e7ejsnfa282ac37bdf',
+      'X-RapidAPI-Host': 'google-news-api1.p.rapidapi.com',
     },
   };
 
   try {
     const response = await fetch(url, options);
-    console.log(response.status);
-    if (!response.ok) throw new Error('Error fetching articles');
+    console.log(response);
     const result = await response.text();
     console.log(result);
   } catch (error) {
