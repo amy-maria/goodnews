@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import Link from 'next/link';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Hero from './components/Hero';
 
 export const metadata: Metadata = {
   title: 'Good News App',
@@ -18,9 +18,8 @@ export default function RootLayout({
     <html lang='en'>
       <body>
         <Navbar />
-
-        <div>{children}</div>
-
+        <Hero />
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

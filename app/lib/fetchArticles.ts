@@ -1,22 +1,21 @@
-const url = 'https://newsnow.p.rapidapi.com/';
-const options = {
-  method: 'POST',
-  headers: {
-    'content-type': 'application/json',
-    'X-RapidAPI-Key': '',
-    'X-RapidAPI-Host': 'newsnow.p.rapidapi.com',
-  },
-  body: {
-    text: 'Europe',
-    region: 'wt-wt',
-    max_results: 25,
-  },
-};
+export default async function fetchArticles() {
+  const url =
+    'https://real-time-news-data.p.rapidapi.com/top-headlines?country=US&lang=en';
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': 'process.env.RapidAPI_Key',
+      'X-RapidAPI-Host': 'process.env.RapidAPI_Host',
+    },
+  };
 
-try {
-  const response = await fetch(url, options);
-  const result = await response.text();
-  console.log(result);
-} catch (error) {
-  console.error(error);
+  try {
+    const response = await fetch(url, options);
+    console.log(response.status);
+    if (!response.ok) throw new Error('Error fetching articles');
+    const result = await response.text();
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
 }

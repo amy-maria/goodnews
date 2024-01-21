@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
@@ -10,14 +11,16 @@ export default function Navbar() {
   };
 
   return (
-    <header className='bg-slate-200 text-black w-full ease-in duraction-300 fixed top-0 left-0 z-10'>
+    <header className='bg-slate-200 text-black w-full ease-in duraction-300 sticky top-0 left-0 z-10'>
       <nav className='max-w-[1366px] mx-auto h-[100px] flex justify-between items-center p-4 '>
         <div>
-          <Link href='/logo' onClick={handleSmallScreenNav}>
-            <span className='font-extrabold text-3xl md:text-2xl xl:text-3xl '>
-              Logo
-            </span>
-          </Link>
+          <Image
+            className='logo'
+            src='/logo-svg.svg'
+            width={75}
+            height={75}
+            alt='Logo for Good News with a drawing of a typewriter'
+          />
         </div>
 
         {/* large screen nav */}
@@ -27,9 +30,6 @@ export default function Navbar() {
           </li>
           <li className='mr-4 lg:mr-8 hover:text-slate-800'>
             <Link href='/about'>About</Link>
-          </li>
-          <li className='mr-4 lg:mr-8 hover:text-slate-800'>
-            <Link href='/contact'>Contact</Link>
           </li>
           <li className='  hover:text-slate-800'>
             <Link href='/profile'>My Profile</Link>
