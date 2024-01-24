@@ -11,7 +11,8 @@ export default async function fetchArticles() {
 
   const response = await fetch(url, options);
 
-  if (!response.ok) throw new Error('Failed to fetch data');
-
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
   return response.json();
 }

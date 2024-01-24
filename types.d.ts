@@ -2,8 +2,10 @@ type NewsArticle = {
   success: boolean;
   news: {
     total: number;
+    articles: Article[];
   };
-  news: [];
+};
+type Article = {
   _score: number;
   title: string;
   link: string;
