@@ -1,8 +1,11 @@
+import NewsPage from './article/page';
+
 export default function Home() {
   return (
     <div>
       <article>
-        <p>generated news with image, click to modal then full page</p>
+        <h2 className='text-center text-2xl'>Daily Headlines</h2>
+        <NewsPage />
       </article>
     </div>
   );

@@ -82,10 +82,10 @@ export default function Navbar() {
             {/* login to modal login page, logout returns to Home */}
 
             <div className='md:hidden'>
-              <button className='w-[150px] bg-sky-700  py-2 rounded-full text-white hover:bg-sky-800 '>
+              <button className='w-[100px] bg-sky-700  py-2 rounded-full text-white hover:bg-sky-800 '>
                 Log In
               </button>
-              <button className='w-[150px] bg-sky-700  py-2 rounded-full text-white hover:bg-sky-800 '>
+              <button className='w-[100px] bg-sky-700  py-2 rounded-full text-white hover:bg-sky-800 '>
                 Log Out
               </button>
             </div>

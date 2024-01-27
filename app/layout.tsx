@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
+import { inter } from './ui/fonts';
 
 export const metadata: Metadata = {
   title: 'Good News App',
@@ -19,7 +20,7 @@ export default function RootLayout({
       <body>
         <Navbar />
         <Hero />
-        <main>{children}</main>
+        <main className={`${inter.className} antialiased`}>{children}</main>
         <Footer />
       </body>
     </html>

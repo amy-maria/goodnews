@@ -1,3 +1,3 @@
 export default function SingleArticle() {
-  return <div>page</div>;
+  return <div>single page articles</div>;
 }
