@@ -1,7 +1,7 @@
 'use client';
 import fetchArticles from '../lib/fetchArticles';
 import { useState, useEffect } from 'react';
-import NewsCard from '../components/NewsCard';
+import NewsCard from './NewsCard';
 
 const NewsPage = () => {
   const [newsData, setNewsData] = useState([]);
@@ -22,11 +22,20 @@ const NewsPage = () => {
     getNewsData();
   }, []);
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div className='text-black text-center'>
       {Array.isArray(newsData) &&
-        newsData.map(({ title, description }, index) => (
-          <NewsCard key={index} title={title} description={description} />
+        newsData.map(({ title, description, urlToImage }, index) => (
+          <NewsCard
+            key={index}
+            title={title}
+            imageUrl={urlToImage}
+            description={description}
+          />
         ))}
     </div>
   );
