@@ -1,8 +1,7 @@
 async function fetchArticles() {
+  let apiKey = `3e3c176de13144be9b51017d1787f4cd`;
   const url =
     'https://newsapi.org/v2/top-headlines?country=us&apiKey=3e3c176de13144be9b51017d1787f4cd';
-
-  //let apiKey = `process.env.API_Key`;
 
   try {
     const response = await fetch(url);

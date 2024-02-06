@@ -1,17 +1,22 @@
 'use client';
-import Image from 'next/image';
+
 import { useState } from 'react';
 
+{
+  /*Single card to display one news article. */
+}
 interface NewsCardProps {
   title: string;
   description: string;
-  imageUrl: string;
+  urlToImage: string;
+  onClick: () => void;
 }
 
 const NewsCard: React.FC<NewsCardProps> = ({
   title,
-  imageUrl,
+  urlToImage,
   description,
+  onClick,
 }) => {
   const [imageError, setImageError] = useState(false);
   const handleImageError = () => {
@@ -20,21 +25,26 @@ const NewsCard: React.FC<NewsCardProps> = ({
   };
 
   return (
-    <div>
-      <h2>{title}</h2>
-      <br />
-      {!imageError ? (
-        <Image
-          src={imageUrl}
-          alt={title}
-          width={100}
-          height={100}
-          onError={handleImageError}
-        />
-      ) : (
-        <p>Error loading image</p>
+    <div
+      className='card relative max-w-full rounded overflow-hidden shadow-lg m-6'
+      onClick={onClick}>
+      {urlToImage && !imageError && (
+        <picture>
+          <img
+            src={urlToImage}
+            alt={title}
+            width={100}
+            height={100}
+            onError={handleImageError}
+            className='w-full'
+          />
+        </picture>
       )}
-      <p className='text-wrap leading-relaxed'>{description}</p>
+
+      <div className='px-6 py-4'>
+        <h5 className='font-bold text-xl mb-2'>{title}</h5>
+      </div>
+      <p className='text-gray-700 text-base text-inherit">'>{description}</p>
     </div>
   );
 };

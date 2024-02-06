@@ -2,15 +2,28 @@
 import fetchArticles from '../lib/fetchArticles';
 import { useState, useEffect } from 'react';
 import NewsCard from './NewsCard';
+import Modal from './Modal';
+
+interface Article {
+  index: number;
+  title: string;
+  description: string;
+  urlToImage: string;
+  name: string;
+  url: string;
+  content: string;
+}
 
 const NewsPage = () => {
-  const [newsData, setNewsData] = useState([]);
+  const [newsData, setNewsData] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
   useEffect(() => {
     const getNewsData = async () => {
       try {
         const data = await fetchArticles();
+
         setNewsData(data.articles);
         setLoading(false);
         console.log(data);
@@ -22,22 +35,39 @@ const NewsPage = () => {
     getNewsData();
   }, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
+  {
+    /*click event for modal */
   }
+  const handleArticleClick = (article: Article) => {
+    console.log('Article clicked:', article);
+    setSelectedArticle(article);
+  };
+  const handleCloseModal = () => {
+    setSelectedArticle(null);
+  };
 
   return (
-    <div className='text-black text-center'>
-      {Array.isArray(newsData) &&
-        newsData.map(({ title, description, urlToImage }, index) => (
-          <NewsCard
-            key={index}
-            title={title}
-            imageUrl={urlToImage}
-            description={description}
-          />
-        ))}
-    </div>
+    <>
+      {loading ? (
+        <div>Loading ...</div>
+      ) : (
+        <div className='card-list text-black text-center'>
+          {newsData.map((article, index) => (
+            <NewsCard
+              key={index}
+              title={article.title}
+              urlToImage={article.urlToImage}
+              description={article.description}
+              onClick={() => handleArticleClick(article)}
+            />
+          ))}
+
+          {selectedArticle && (
+            <Modal article={selectedArticle} onClose={handleCloseModal} />
+          )}
+        </div>
+      )}
+    </>
   );
 };
 
