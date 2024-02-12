@@ -1,4 +1,4 @@
-import NewsPage from './components/NewsPage';
+import NewsPage from './newspage/NewsPage';
 
 export default function Home() {
   return (

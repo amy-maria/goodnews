@@ -1,8 +1,8 @@
 'use client';
 import fetchArticles from '../lib/fetchArticles';
 import { useState, useEffect } from 'react';
-import NewsCard from './NewsCard';
-import Modal from './Modal';
+import NewsCard from '../components/NewsCard';
+import ModalPage from './modal';
 
 interface Article {
   index: number;
@@ -12,9 +12,11 @@ interface Article {
   name: string;
   url: string;
   content: string;
+  author: string | null;
 }
 
 const NewsPage = () => {
+  console.log('NewsPage re-rendered');
   const [newsData, setNewsData] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
@@ -43,6 +45,7 @@ const NewsPage = () => {
     setSelectedArticle(article);
   };
   const handleCloseModal = () => {
+    console.log('Selected article:', selectedArticle);
     setSelectedArticle(null);
   };
 
@@ -63,7 +66,7 @@ const NewsPage = () => {
           ))}
 
           {selectedArticle && (
-            <Modal article={selectedArticle} onClose={handleCloseModal} />
+            <ModalPage article={selectedArticle} onClose={handleCloseModal} />
           )}
         </div>
       )}

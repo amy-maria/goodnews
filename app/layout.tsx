@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from './components/Navbar';
-import Modal from './components/Modal';
-
 import Hero from './components/Hero';
 import { inter } from './ui/fonts';
+import Footer from './components/Footer';
 
 export const metadata: Metadata = {
   title: 'Good News App',
@@ -23,8 +22,10 @@ export default function RootLayout({
       <body>
         <Navbar />
         <Hero />
-        <main className={`${inter.className} antialiased`}>{children}</main>
-        <Modal />
+        <main className='min-h-screen flex flex-col{`${inter.className} antialiased`}'>
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

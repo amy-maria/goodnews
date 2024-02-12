@@ -26,7 +26,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
 
   return (
     <div
-      className='card relative max-w-full rounded overflow-hidden shadow-lg m-6'
+      className='card relative max-w-3/4 rounded overflow-hidden shadow-xl m-8'
       onClick={onClick}>
       {urlToImage && !imageError && (
         <picture>
@@ -44,7 +44,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
       <div className='px-6 py-4'>
         <h5 className='font-bold text-xl mb-2'>{title}</h5>
       </div>
-      <p className='text-gray-700 text-base text-inherit">'>{description}</p>
+      {/*<p className='text-gray-700 text-base text-inherit'>{description}</p>*/}
     </div>
   );
 };

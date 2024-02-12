@@ -2,11 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.modal {
+.hidden {
   display: none;
-  /* Other styles */
 }
 
-.modal.show {
+.visible {
   display: block;
 }
