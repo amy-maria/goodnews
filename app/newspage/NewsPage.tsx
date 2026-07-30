@@ -1,10 +1,12 @@
 'use client';
+import { getExcludedWords } from '../lib/excludedWordsApi';
+import filterArticles from '../lib/filterArticles';
 import fetchArticles from '../lib/fetchArticles';
 import { useState, useEffect } from 'react';
 import NewsCard from '../components/NewsCard';
 import ModalPage from './modal';
 
-interface Article {
+export interface Article {
   index: number;
   title: string;
   description: string;
@@ -17,6 +19,7 @@ interface Article {
 
 const NewsPage = () => {
   console.log('NewsPage re-rendered');
+  const [excludedWords, setExcludedWords] = useState<string[]>([]); //holds whatever getExcludedWords returns
   const [newsData, setNewsData] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
@@ -25,21 +28,24 @@ const NewsPage = () => {
     const getNewsData = async () => {
       try {
         const data = await fetchArticles();
-
+        //getExcludedWords(data);
         setNewsData(data.articles);
         setLoading(false);
-        console.log(data);
+        //console.log(data);
       } catch (error) {
         console.error('Error fetching data:', error);
         setLoading(false);
       }
     };
+    const loadExcludedWords = async () => {
+      const words = await getExcludedWords();
+      setExcludedWords(words);
+    };
     getNewsData();
+    //setExcludedWords(getExcludedWords());
+    loadExcludedWords();
   }, []);
 
-  {
-    /*click event for modal */
-  }
   const handleArticleClick = (article: Article) => {
     console.log('Article clicked:', article);
     setSelectedArticle(article);
@@ -48,6 +54,7 @@ const NewsPage = () => {
     console.log('Selected article:', selectedArticle);
     setSelectedArticle(null);
   };
+  const filteredArticles = filterArticles(newsData, excludedWords);
 
   return (
     <>
@@ -55,7 +62,7 @@ const NewsPage = () => {
         <div>Loading ...</div>
       ) : (
         <div className='card-list text-black text-center'>
-          {newsData.map((article, index) => (
+          {filteredArticles.map((article, index) => (
             <NewsCard
               key={index}
               title={article.title}

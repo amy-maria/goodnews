@@ -4,10 +4,11 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import { inter } from './ui/fonts';
 import Footer from './components/Footer';
+import AuthProvider from './components/AuthProvider';
 
 export const metadata: Metadata = {
-  title: 'Good News App',
-  description: 'Good News filtered by your own excluded keywords',
+  title: 'Good News',
+  description: 'Good News filtered by your own keywords',
 };
 
 export default function RootLayout({
@@ -20,12 +21,14 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
-        <Navbar />
-        <Hero />
-        <main className='min-h-screen flex flex-col{`${inter.className} antialiased`}'>
-          {children}
-        </main>
-        <Footer />
+        <AuthProvider>
+          <Navbar />
+          <Hero />
+          <main className='min-h-screen flex flex-col{`${inter.className} antialiased`}'>
+            {children}
+          </main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
