@@ -4,29 +4,42 @@ export default function Footer() {
   const now = new Date();
 
   return (
-    <div>
-      <footer className='bg-slate-200 text-slate-800 mt-auto  '>
-        <ul className='flex flex-row justify-evenly m-5'>
-          <li>
-            {/*add link*/}
+    <footer className='bg-dark text-muted mt-auto'>
+      <ul className='flex flex-row justify-evenly m-3'>
+        <li>
+          <a
+            href='https://x.com/amymrowell'
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label='Twitter link'>
             <FaTwitter />
-          </li>
-          <li>
-            {/*add link*/}
+          </a>
+        </li>
+        <li>
+          <a
+            href='https://github.com/amy-maria/goodnews'
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label='Github link'>
             <FaGithub />
-          </li>
-          <li>
-            {/*add email*/}
+          </a>
+        </li>
+        <li>
+          <a
+            href='mailto:amymrowell@gmail.com'
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label='Email'>
             <FaEnvelope />
-          </li>
-        </ul>
-        <div className='m-3 text-center'>
-          <p>
-            <span>&copy;</span>
-            {now.getFullYear()} All Rights Reserved.
-          </p>
-        </div>
-      </footer>
-    </div>
+          </a>
+        </li>
+      </ul>
+      <div className='m-4 text-center'>
+        <p>
+          <span>&copy;</span>
+          {now.getFullYear()} All Rights Reserved.
+        </p>
+      </div>
+    </footer>
   );
 }

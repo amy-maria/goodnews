@@ -8,6 +8,7 @@ import {
 } from '../lib/excludedWordsApi';
 import SignupForm from '../components/SignupForm';
 import LoginForm from '../components/LoginForm';
+import Button from '../components/Button';
 
 export default function Profile() {
   const { data: session, status } = useSession(); //reads whatever session state is being tracked, conditioner render of loading,unauthenticated and authenticated
@@ -59,9 +60,8 @@ export default function Profile() {
   };
 
   return (
-    <div>
+    <div className='m-4'>
       {/*wrap as cards*/}
-      <h1>My profile!</h1>
       {status === 'loading' && <p>Loading...</p>}
 
       {status === 'unauthenticated' && (
@@ -70,14 +70,20 @@ export default function Profile() {
           <p>
             {authMode === 'login' ? (
               <>
-                Don&apos;t have an account?{' '}
-                <button onClick={() => setAuthMode('signup')}>Sign Up</button>
+                <p className='m-4'>
+                  Don't have a registered account?
+                  <Button
+                    className='ml-4'
+                    onClick={() => setAuthMode('signup')}>
+                    Sign Up
+                  </Button>
+                </p>
               </>
             ) : (
-              <>
+              <p>
                 Already have an account?{' '}
-                <button onClick={() => setAuthMode('login')}>Log In</button>
-              </>
+                <Button onClick={() => setAuthMode('login')}>Log In</Button>
+              </p>
             )}
           </p>
         </div>
@@ -85,45 +91,59 @@ export default function Profile() {
 
       {status === 'authenticated' && (
         <div>
-          <div className='rounded-full bg-blue-600 text-white w-12 h-12 flex items-center justify-center text-xl mb-2'>
+          <div className='rounded-full bg- bg-accent text-muted w-16 h-16 flex items-center justify-center text-xl m-4'>
             {session.user?.email?.[0].toUpperCase()}
           </div>
-          <p>{session.user?.email}</p>
-          <button onClick={() => signOut()}>Log Out</button>
+          <p className='m-4'>{session.user?.email}</p>
+          <Button className='ml-4' onClick={() => signOut()}>
+            Log Out
+          </Button>
         </div>
       )}
 
       {/*wrap as cards*/}
-      <h3>Excluded Words</h3>
-      <input
-        type='text'
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <button className='blue-700' onClick={handleAdd}>
-        Add
-      </button>
-
-      {duplicateWarning && (
-        <div>
-          <p className='text-red-600'>Duplicate word</p>
-          <button onClick={handleAcknowledgeWarning}>OK</button>
+      <div className='m-4 border-2 border-dark-elevated rounded-lg p-4 bg-light text-ink'>
+        <h3 className='font-bold text-lg mb-2'>Excluded Words</h3>
+        <div className='mb-2'>
+          <input
+            type='text'
+            value={inputValue}
+            className='mr-4 border-2 rounded px-2 py-1'
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+          <Button onClick={handleAdd}>Add</Button>
         </div>
-      )}
-      <div>
-        {excludedWords.map((word) => (
-          <div
-            key={word}
-            className='relative inline-block text-black pr-5 pl-2 py-1 mr-2 mb-2 border rounded-full'>
-            {word}
-            <button
-              className='absolute top-0 right-1 text-xs'
-              onClick={() => handleRemove(word)}>
-              X
-            </button>
+
+        {duplicateWarning && (
+          <div className='mb-2'>
+            <p className='text-red-600'>
+              Word could not be added. Duplicate word or user is not logged in.
+            </p>
+            <Button onClick={handleAcknowledgeWarning}>OK</Button>
           </div>
-        ))}
+        )}
+
+        <p className='mb-4'>
+          To remove a word or phrase from the excluded list, click on the X in
+          the upper right hand corner.{' '}
+        </p>
+
+        <div>
+          {excludedWords.map((word) => (
+            <div
+              key={word}
+              className='relative inline-block text-black pr-5 pl-3 py-1 mr-2 mb-2 border-2 bg-amber-300 rounded-s-full'>
+              {word}
+              <button
+                className='absolute top-0 right-1 text-xs'
+                onClick={() => handleRemove(word)}>
+                X
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
-}
+};
+   

@@ -61,7 +61,7 @@ const NewsPage = () => {
       {loading ? (
         <div>Loading ...</div>
       ) : (
-        <div className='card-list text-black text-center'>
+        <div className='grid grid-cols1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4 text-black text-center'>
           {filteredArticles.map((article, index) => (
             <NewsCard
               key={index}

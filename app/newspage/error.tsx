@@ -1,5 +1,6 @@
 'use client';
 import { useEffect } from 'react';
+import Button from '../components/Button';
 
 export default function Error({
   error,
@@ -15,7 +16,7 @@ export default function Error({
   return (
     <div>
       <h2>Something went wrong!</h2>
-      <button onClick={() => reset()}>Try Again</button>
+      <Button onClick={() => reset()}>Try Again</Button>
     </div>
   );
 }

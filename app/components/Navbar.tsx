@@ -1,21 +1,30 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import Button from './Button';
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/profile', label: 'Profile' },
+];
 
 export default function Navbar() {
   const [menuIcon, setMenuIcon] = useState(false);
+  const pathname = usePathname();
   const handleSmallScreenNav = () => {
     setMenuIcon(!menuIcon);
   };
 
   return (
-    <header className='bg-slate-200 text-black w-full ease-in duraction-300 sticky top-0 left-0 z-10'>
-      <nav className='max-w-[1366px] mx-auto h-[100px] flex justify-between items-center p-4 '>
+    <header className='bg-dark text-muted  transition-all duration-300 sticky top-0 left-0 z-10 shadow-md'>
+      <nav className='max-w-7xl mx-auto h-20 flex justify-between items-center px-4 '>
         <div>
           <Image
-            className='logo'
+            className='logo rounded-2xl'
             src='/logo-svg.svg'
             width={75}
             height={75}
@@ -24,71 +33,58 @@ export default function Navbar() {
         </div>
 
         {/* large screen nav */}
-        <ul className='hidden md:flex uppercase font-semibold text-1xl lg:text-[20px] test-slate-600'>
-          <li className='mr-4 lg:mr-8 hover:text-slate-800'>
-            <Link href='/'>Home</Link>
-          </li>
-          <li className='mr-4 lg:mr-8 hover:text-slate-800'>
-            <Link href='/about'>About</Link>
-          </li>
-          <li className='  hover:text-slate-800'>
-            <Link href='/profile'>My Profile</Link>
-          </li>
+        <ul className='hidden md:flex items-center gap-4 lg:gap-8 uppercase font-semibold text-sm lg:text-base'>
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className={
+                  pathname === link.href
+                    ? 'bg-dark-elevated text-light rounded-full px-4 py-2 shadow-[0_0_12px_2px_rgba(56,189,248,0.35)]'
+                    : 'px-4 py-2 hover:text-light transition-colors'
+                }>
+                {link.label}
+              </Link>
+            </li>
+          ))}
         </ul>
-        {/* login to modal login page, logout returns to Home */}
-        <div className='hidden md:flex'>
-          <button className='mr-5 bg-sky-700 px-2 py-2 rounded-full text-white hover:bg-sky-800 sm:px-8 sm:py-3'>
-            Log In
-          </button>
-          <button className='mr-5 bg-sky-700 px-2 py-2 rounded-full text-white hover:bg-sky-800 sm:px-8 sm:py-3'>
-            Log Out
-          </button>
-        </div>
+
         {/*smaller screen nav with hamburger button*/}
-        <div className='flex md:hidden' onClick={handleSmallScreenNav}>
+        <div
+          className='flex md:hidden text-light text-xl cursor-pointer'
+          onClick={handleSmallScreenNav}>
           {menuIcon ? <FaTimes /> : <FaBars />}
         </div>
+
         {/* small screen navbar w/hamburger menu */}
         <div
           className={
             menuIcon
-              ? 'md:hidden absolute top-[100px] right-0    bg-slate-200 text-black ease-in duration-150 cursor-pointer'
-              : 'md:hidden absolute top-[100px] right-[-100%]    bg-slate-200 text-black text-center ease-in duration-500 cursor-pointer'
+              ? 'md:hidden absolute top-20 right-0    bg-dark-elevated text-muted ease-in duration-150 cursor-pointer'
+              : 'md:hidden absolute top-20 -right-full   bg-dark-elevated text-muted text-center ease-in duration-500 cursor-pointer'
           }>
           <div>
             {/* small screen nav links */}
-            <ul className='md:hidden uppercase font-bold text-md text-slate-600'>
-              <li
-                className='mr-4 p-2 hover:text-slate-900'
-                onClick={handleSmallScreenNav}>
-                <Link href='/'>Home</Link>
-              </li>
-              <li
-                className='mr-4 p-2 hover:text-slate-800'
-                onClick={handleSmallScreenNav}>
-                <Link href='/about'>About</Link>
-              </li>
-              <li
-                className='mr-4 p-2 hover:text-slate-800'
-                onClick={handleSmallScreenNav}>
-                <Link href='/contact'>Contact</Link>
-              </li>
-              <li
-                className='mr-4 p-2 hover:text-slate-800'
-                onClick={handleSmallScreenNav}>
-                <Link href='/profile'>My Profile</Link>
-              </li>
+            <ul className='uppercase font-bold text-md'>
+              {navLinks.map((link) => (
+                <li
+                  key={link.href}
+                  className='p-2'
+                  onClick={handleSmallScreenNav}>
+                  <Link
+                    href={link.href}
+                    className={
+                      pathname === link.href
+                        ? 'bg-dark-elevated  text-light rounded-full px-4 py-2 shadow-[0_0_12px_2px_var(--color-accent)]'
+                        : 'hover:text-light transition-colors'
+                    }>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
-            {/* login to modal login page, logout returns to Home */}
 
-            <div className='md:hidden'>
-              <button className='w-[100px] bg-sky-700  py-2 rounded-full text-white hover:bg-sky-800 '>
-                Log In
-              </button>
-              <button className='w-[100px] bg-sky-700  py-2 rounded-full text-white hover:bg-sky-800 '>
-                Log Out
-              </button>
-            </div>
+            {/* login to modal login page, logout returns to Home */}
           </div>
         </div>
       </nav>

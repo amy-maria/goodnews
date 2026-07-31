@@ -1,5 +1,6 @@
 'use client';
 import { useState } from "react";
+import Button from './Button';
 
 export default function SignUp() {
     const [email, setEmail] = useState('');
@@ -38,27 +39,29 @@ export default function SignUp() {
     };
     
     return (
-        <div>
-            <input
-                type='email'
-                placeholder='Email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                type='password'
-                placeholder='Password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button onClick={handleSignup}>Sign Up</button>
+      <div>
+        <input
+          type='email'
+          placeholder='Email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type='password'
+          placeholder='Password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button onClick={handleSignup}>Sign Up</Button>
 
-            {signupMessage && (
-                <p className={signupMessage.type === 'error' ? 'text-red-600' : 'text-green-600'
-                }>
+        {signupMessage && (
+          <p
+            className={
+              signupMessage.type === 'error' ? 'text-red-600' : 'text-green-600'
+            }>
             {signupMessage.text}
-            </p>
-            )}
-        </div>
-    )
+          </p>
+        )}
+      </div>
+    );
 }

@@ -1,11 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-.hidden {
-  display: none;
+@theme {
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+
+    --color-dark: #0f172a;
+    --color-dark-elevated: #1e293b;
+    --color-light: #f8fafc;
+    --color-muted: #cbd5e1;
+    --color-ink: #1e293b;
+    --color-accent: #0369a1;
+    --color-accent-hover: #4cb7f1;
+
+  
 }
 
-.visible {
-  display: block;
-}

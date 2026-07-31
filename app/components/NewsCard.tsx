@@ -20,15 +20,15 @@ const NewsCard: React.FC<NewsCardProps> = ({
 }) => {
   const [imageError, setImageError] = useState(false);
   const handleImageError = () => {
-    console.error('Image failed to load:');
+    console.warn('Image failed to load:', urlToImage);
     setImageError(true);
   };
 
   return (
     <div
-      className='card relative max-w-3/4 rounded overflow-hidden shadow-xl m-8'
+      className='relative overflow-hidden box-border border-4 shadow-xl'
       onClick={onClick}>
-      {urlToImage && !imageError && (
+      {urlToImage && !imageError ? (
         <picture>
           <img
             src={urlToImage}
@@ -39,12 +39,15 @@ const NewsCard: React.FC<NewsCardProps> = ({
             className='w-full'
           />
         </picture>
+      ) : (
+        <div className='w-full h-25 bg-gray-200 flex items-center justify-center text-gray-500 text-sm'>
+          No image available.
+        </div>
       )}
 
       <div className='px-6 py-4'>
         <h5 className='font-bold text-xl mb-2'>{title}</h5>
       </div>
-      {/*<p className='text-gray-700 text-base text-inherit'>{description}</p>*/}
     </div>
   );
 };

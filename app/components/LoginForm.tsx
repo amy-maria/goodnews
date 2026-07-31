@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import Button from './Button';
 
 export default function LoginForm() {
     const [email, setEmail] = useState('');
@@ -31,27 +32,37 @@ export default function LoginForm() {
     };
 
     return (
-        <div>
-            <input
-                type='email'
-                placeholder='Email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                type='password'
-                placeholder='Password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button onClick={handleLogin}>Log In</button>
-
-            {loginMessage && (
-                <p className={loginMessage.type === 'error' ? 'text-red-600' : 'text-green-600'}
-                >
-                {loginMessage.text}
+      <div className='m-4'>
+        <p className='mb-2'>
+          To edit filter keywords, enter email and password to log in to your
+          account.
         </p>
-    )}
-        </div>
+        <input
+          className='border-2 mr-4'
+          type='email'
+          placeholder='Email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          className='border-2 mr-4'
+          type='password'
+          placeholder='Password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button onClick={handleLogin}>Log In</Button>
+
+        {loginMessage && (
+          <p
+            className={
+              loginMessage.type === 'error'
+                ? 'text-red-600 mt-2'
+                : 'text-green-600 mt-2'
+            }>
+            {loginMessage.text}
+          </p>
+        )}
+      </div>
     );
 }

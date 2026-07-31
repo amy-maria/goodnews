@@ -5,11 +5,11 @@ import { sql } from '@/app/lib/db';
 export async function POST(request: NextRequest) {
     const { email, password } = await request.json(); //parses the signup form
     
-    if (!email | !password) {
-        return NextResponse.json(
-            { error: 'Email and password are required.' },
-            { status: 400 }
-        );
+    if (!email || !password) {
+      return NextResponse.json(
+        { error: 'Email and password are required.' },
+        { status: 400 },
+      );
     }
 
     const passwordHash = await bcrypt.hash(password, 10); //10 is salt rounds, higher is slower but more resistent to brute force
