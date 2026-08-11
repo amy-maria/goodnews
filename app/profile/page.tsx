@@ -67,7 +67,7 @@ export default function Profile() {
       {status === 'unauthenticated' && (
         <div>
           {authMode === 'login' ? <LoginForm /> : <SignupForm />}
-          <p>
+          <div>
             {authMode === 'login' ? (
               <>
                 <p className='m-4'>
@@ -85,7 +85,7 @@ export default function Profile() {
                 <Button onClick={() => setAuthMode('login')}>Log In</Button>
               </p>
             )}
-          </p>
+          </div>
         </div>
       )}
 
@@ -103,9 +103,13 @@ export default function Profile() {
 
       {/*wrap as cards*/}
       <div className='m-4 border-2 border-dark-elevated rounded-lg p-4 bg-light text-ink'>
-        <h3 className='font-bold text-lg mb-2'>Excluded Words</h3>
+        <h2 className='font-bold text-lg mb-2'>Excluded Words</h2>
         <div className='mb-2'>
+          <label htmlFor='excluded-word-input' className='sr-only'>
+            Word or phrase to exclude
+          </label>
           <input
+            id='excluded-word-input'
             type='text'
             value={inputValue}
             className='mr-4 border-2 rounded px-2 py-1'

@@ -3,6 +3,7 @@ import { getExcludedWords } from '../lib/excludedWordsApi';
 import filterArticles from '../lib/filterArticles';
 import fetchArticles from '../lib/fetchArticles';
 import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import NewsCard from '../components/NewsCard';
 import ModalPage from './modal';
 
@@ -18,7 +19,8 @@ export interface Article {
 }
 
 const NewsPage = () => {
-  console.log('NewsPage re-rendered');
+  //console.log('NewsPage re-rendered');
+  const { status } = useSession();
   const [excludedWords, setExcludedWords] = useState<string[]>([]); //holds whatever getExcludedWords returns
   const [newsData, setNewsData] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
@@ -37,21 +39,24 @@ const NewsPage = () => {
         setLoading(false);
       }
     };
+    getNewsData();
+  }, []);
+
+  useEffect(() => {
+    if (status !== 'authenticated') return;
     const loadExcludedWords = async () => {
       const words = await getExcludedWords();
       setExcludedWords(words);
     };
-    getNewsData();
-    //setExcludedWords(getExcludedWords());
     loadExcludedWords();
-  }, []);
+  }, [status]);
 
   const handleArticleClick = (article: Article) => {
-    console.log('Article clicked:', article);
+    //console.log('Article clicked:', article);
     setSelectedArticle(article);
   };
   const handleCloseModal = () => {
-    console.log('Selected article:', selectedArticle);
+    //console.log('Selected article:', selectedArticle);
     setSelectedArticle(null);
   };
   const filteredArticles = filterArticles(newsData, excludedWords);
@@ -79,6 +84,6 @@ const NewsPage = () => {
       )}
     </>
   );
-};
+};;
 
 export default NewsPage;

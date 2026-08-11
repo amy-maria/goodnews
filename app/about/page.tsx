@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <div className='m-4 max-w-3xl mx-auto'>
-      <h1 className='text-center text-2xl font-bold mt-4 mb-4'>About</h1>
+      <h2 className='text-center text-2xl font-bold mt-4 mb-4'>About</h2>
 
       <div className='border-2 border-dark-elevated rounded-lg p-4 bg-light text-ink text-xl'>
         <p>
@@ -9,7 +9,7 @@ export default function About() {
           combined with the need to work more with Next.js, databases, and to
           run tests on the app without tutorials.
         </p>
-        <p className='mt-4'>
+        <div className='mt-4'>
           The Good News idea began out of my frustration with "news" sites that
           were full of filler content. I didn't want articles with:
           <ul className='list-disc list-inside space-y-1'>
@@ -23,7 +23,7 @@ export default function About() {
             <li>Stories fashioned out of social media reactions.</li>
             <li>Excessive entertainment news and gossip.</li>
           </ul>
-        </p>
+        </div>
         <p className='mt-4'>
           Grumpiness won out and a news app where I could filter out articles
           based on keywords was started.

@@ -37,14 +37,22 @@ export default function LoginForm() {
           To edit filter keywords, enter email and password to log in to your
           account.
         </p>
+        <label htmlFor='login-email' className='sr-only'>
+          Email
+        </label>
         <input
+          id='login-email'
           className='border-2 mr-4'
           type='email'
           placeholder='Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <label htmlFor='login-password' className='sr-only'>
+          Password
+        </label>
         <input
+          id='login-password'
           className='border-2 mr-4'
           type='password'
           placeholder='Password'

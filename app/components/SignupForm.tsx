@@ -40,13 +40,21 @@ export default function SignUp() {
     
     return (
       <div>
+        <label htmlFor='signup-email' className='sr-only'>
+          Email
+        </label>
         <input
+          id='signup-email'
           type='email'
           placeholder='Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <label htmlFor='signup-password' className='sr-only'>
+          Password
+        </label>
         <input
+          id='signup-password'
           type='password'
           placeholder='Password'
           value={password}

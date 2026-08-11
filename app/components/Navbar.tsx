@@ -24,7 +24,7 @@ export default function Navbar() {
       <nav className='max-w-7xl mx-auto h-20 flex justify-between items-center px-4 '>
         <div>
           <Image
-            className='logo rounded-2xl'
+            className='logo rounded-2xl h-[75px] w-[75px]'
             src='/logo-svg.svg'
             width={75}
             height={75}
