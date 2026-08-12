@@ -45,7 +45,6 @@ const NewsCard: React.FC<NewsCardProps> = ({
             <img
               src={urlToImage}
               alt={title}
-              fill
               className='object-cover'
               onError={handleImageError}
               sizes='(max-width: 768px) 100vw, (max-width:1024px) 50vw, 33vw'

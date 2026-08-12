@@ -26,17 +26,27 @@ const NewsPage = () => {
   const [loading, setLoading] = useState(true);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
+  const MIN_LOADING_MS = 500;
   useEffect(() => {
+    const start = Date.now();
     const getNewsData = async () => {
       try {
         const data = await fetchArticles();
         //getExcludedWords(data);
         setNewsData(data.articles);
-        setLoading(false);
+        //setLoading(false);
         //console.log(data);
       } catch (error) {
         console.error('Error fetching data:', error);
-        setLoading(false);
+        //setLoading(false);
+      } finally {
+        const elapsed = Date.now() - start;
+        const remaining = MIN_LOADING_MS - elapsed;
+        if (remaining > 0) {
+          setTimeout(() => setLoading(false), remaining);
+        } else {
+          setLoading(false);
+        }
       }
     };
     getNewsData();
