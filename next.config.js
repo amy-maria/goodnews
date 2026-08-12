@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
-const { OutputFileType } = require('typescript');
+
 
 const nextConfig = {
-  OutputFileTracingRoot: path.join(__dirname),
+  outputFileTracingRoot: path.join(__dirname),
   turbopack: {
     root: __dirname,
   },
@@ -22,7 +22,7 @@ const nextConfig = {
         headers: [
           { key: 'X-Frame-Options', value: 'DENY' },
           {
-            key: 'Strict-Transparent-Security',
+            key: 'Strict-Transport-Security',
             value: 'max-age=63072000; includeSubDomains;  preload',
           },
           { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
