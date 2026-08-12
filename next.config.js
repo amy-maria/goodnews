@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
+const { OutputFileType } = require('typescript');
+
 const nextConfig = {
+  OutputFileTracingRoot: path.join(__dirname),
+  turbopack: {
+    root: __dirname,
+  },
   images: {
     remotePatterns: [
       {
