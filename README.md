@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Good News
 
-## Getting Started
+This project started out as a reaction to an everyday irritation, combined with wanting more hands-on practice with Next.js, databases, and testing an app without following tutorials.
 
-First, run the development server:
+The idea came from frustration with "news" sites full of filler content. I didn't want articles with:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- "Everybody says" or "I'm obsessed" takes on this or that.
+- Content written to drive traffic to affiliate shopping sites.
+- Stories fashioned out of social media reactions.
+- Excessive entertainment news and gossip.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Grumpiness won out, and a news app where I could filter out articles based on my own keywords was born.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Details
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Built with Next.js (App Router) and React
+- Styled with Tailwind CSS
+- Authentication via NextAuth, 
+- Neon Postgres database
+- Custom keyword/phrase filtering, tied to a user's account
+- News data from NewsAPI
+- Rate limiting on failed login attempts
 
-## Learn More
+# Testing
+I wanted to actually learn to test this app properly, not just skip it — there are three layers:
 
-To learn more about Next.js, take a look at the following resources:
+- Unit tests (Vitest + Testing Library) — component and utility-function level, e.g. filterArticles.test.ts, NewsCard.test.tsx, LoginForm.test.tsx.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- End-to-end tests (Playwright, in tests/) — full user flows against a running instance of the app: signup/login/logout, login rate-limiting/lockout behavior, and navigation between pages.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Accessibility scans (@axe-core/playwright, in tests/accessibility.spec.ts) — automated axe-core audits of the home, about, and profile pages, asserting zero detected violations.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Accessibility
+Beyond the automated axe-core scans, the app follows these practices:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Interactive elements that aren't native buttons (like the article cards) use role="button", tabIndex={0}, an aria-label describing the action, and keyboard handling for Enter/Space activation.
+
+- Form inputs use associated <label> elements (visually hidden with sr-only where a visible label isn't needed) rather than relying on placeholder text alone.
+
+- Focus states are visible on interactive cards.
+
+# Deployment
+Deployed on Vercel. 

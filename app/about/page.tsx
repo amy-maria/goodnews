@@ -6,8 +6,8 @@ export default function About() {
       <div className='border-2 border-dark-elevated rounded-lg p-4 bg-light text-ink text-xl'>
         <p>
           This project was started out of a reaction to an every day irritation
-          combined with the need to work more with Next.js, databases, and to
-          run tests on the app without tutorials.
+          combined with the need to work with Next.js, databases, and run tests
+          on an app without tutorials.
         </p>
         <div className='mt-4'>
           The Good News idea began out of my frustration with "news" sites that
@@ -31,12 +31,13 @@ export default function About() {
         <h2 className='text-lg font-bold mt-6 mb-2'>Project Details</h2>
         <ul className='list-disc list-inside space-y-1'>
           <li>Build with Next.js (App Router) and React</li>
-          <li>Styles with Tailwind CSS</li>
-          <li>Authentication via NextAuth, back by Postgres Neon database</li>
+          <li>Styled with Tailwind CSS</li>
+          <li>Authentication via NextAuth</li>
+          <li>Postgres Neon database</li>
           <li>Custom keyword/phrase filtering, tied to a user's account</li>
           <li>
-            News data from NewsAPI, with local mock dataset for development and
-            testing
+            News data from NewsAPI, with a local mock dataset for development
+            and testing
           </li>
         </ul>
       </div>
