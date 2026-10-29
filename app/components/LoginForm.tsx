@@ -21,9 +21,9 @@ export default function LoginForm() {
             redirect: false,
         });//redirect false tells signin not to redirect to a new page but return to a result object
 
-        if (result?.error) {
-            setLoginMessage({ type: 'error', text: 'Invalid email or password' });
-            return;
+        if (!result?.ok || result.error) {
+          setLoginMessage({ type: 'error', text: 'Invalid email or password' });
+          return;
         }
         setLoginMessage({ type: 'success', text: 'Logged In' });
         setEmail('');
